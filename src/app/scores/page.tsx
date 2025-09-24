@@ -1,10 +1,47 @@
-import { getScores } from "@/lib/supabase/scores";
+"use client";
+
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { getScoresClient } from "@/lib/supabase/scores-client";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Trophy, Medal, Award, Clock, User } from "lucide-react";
+import { Score } from "@/lib/types";
 
-export default async function ScoresPage() {
-  const scores = await getScores();
+export default function ScoresPage() {
+  const [scores, setScores] = useState<Score[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
+
+  useEffect(() => {
+    const loadScores = async () => {
+      try {
+        const scoresData = await getScoresClient();
+        setScores(scoresData);
+      } catch (error) {
+        console.error('Error loading scores:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadScores();
+  }, []);
+
+  const handleHomeClick = () => {
+    // Clear the current user from session storage
+    sessionStorage.removeItem('currentUser');
+    // Redirect to the registration page (home page)
+    router.push('/');
+  };
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen bg-gradient-to-br from-slate-900 to-slate-800">
+        <div className="text-white text-xl">Loading scores...</div>
+      </div>
+    );
+  }
 
   const getRankIcon = (index: number) => {
     switch (index) {
@@ -46,8 +83,12 @@ export default async function ScoresPage() {
             Top reaction times from players
           </p>
           <div className="flex gap-4 justify-center">
-            <Button asChild variant="outline" className="bg-white/10 border-white/20 text-white hover:bg-white/20">
-              <Link href="/">Home</Link>
+            <Button 
+              onClick={handleHomeClick}
+              variant="outline" 
+              className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+            >
+              Home
             </Button>
           </div>
         </div>

@@ -28,6 +28,13 @@ export default function TestPage() {
     setIsLoading(false);
   }, []);
 
+  useEffect(() => {
+    // Redirect to home if no user after loading is complete
+    if (!isLoading && !currentUser) {
+      router.push('/');
+    }
+  }, [isLoading, currentUser, router]);
+
   const handleUserCleared = () => {
     setCurrentUser(null);
     sessionStorage.removeItem('currentUser');
@@ -42,7 +49,6 @@ export default function TestPage() {
   }
 
   if (!currentUser) {
-    router.push('/');
     return null;
   }
 
