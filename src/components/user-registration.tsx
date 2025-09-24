@@ -20,7 +20,7 @@ export default function UserRegistration({ onUserRegistered }: UserRegistrationP
     setError("");
 
     if (!name.trim() || !email.trim()) {
-      setError("Please fill in both name and email");
+      setError("Vänligen fyll i både namn och e-post");
       setIsLoading(false);
       return;
     }
@@ -37,7 +37,7 @@ export default function UserRegistration({ onUserRegistered }: UserRegistrationP
       onUserRegistered(user);
     } catch (err) {
       console.error('Error registering user:', err);
-      setError("Failed to register user. Please try again.");
+      setError("Misslyckades att registrera användare. Försök igen.");
     } finally {
       setIsLoading(false);
     }
@@ -46,16 +46,20 @@ export default function UserRegistration({ onUserRegistered }: UserRegistrationP
   return (
     <div className="bg-white/10 backdrop-blur-sm rounded-lg p-8 w-full max-w-md">
         <h1 className="text-3xl font-bold text-white mb-6 text-center">
-          Enter Your Details
+          Reaktionstest - Samtal
         </h1>
-        <p className="text-white/80 mb-6 text-center">
-          Please enter your name and email to start playing
+        <p className="text-white/80 mb-4 text-center">
+          Ange dina uppgifter för att starta testet
+        </p>
+        <p className="text-white/60 mb-6 text-center text-sm">
+          Du kommer att få en inkommande samtalsnotis - klicka så snabbt som möjligt när samtalet "missas". 
+          Vi jämför din tid med vår AI som alltid är blixtsnabb!
         </p>
         
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-white/90 mb-2">
-              Name
+              Namn
             </label>
             <input
               id="name"
@@ -63,14 +67,14 @@ export default function UserRegistration({ onUserRegistered }: UserRegistrationP
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="w-full px-3 py-2 bg-white/20 border border-white/30 rounded-md text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent"
-              placeholder="Enter your name"
+              placeholder="Ange ditt namn"
               required
             />
           </div>
           
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-white/90 mb-2">
-              Email
+              E-post
             </label>
             <input
               id="email"
@@ -78,7 +82,7 @@ export default function UserRegistration({ onUserRegistered }: UserRegistrationP
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-3 py-2 bg-white/20 border border-white/30 rounded-md text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent"
-              placeholder="Enter your email"
+              placeholder="Ange din e-post"
               required
             />
           </div>
@@ -94,7 +98,7 @@ export default function UserRegistration({ onUserRegistered }: UserRegistrationP
             disabled={isLoading}
             className="w-full bg-white/20 hover:bg-white/30 text-white border border-white/30"
           >
-            {isLoading ? "Registering..." : "Start Playing"}
+            {isLoading ? "Registrerar..." : "Starta Test"}
           </Button>
         </form>
     </div>
