@@ -25,8 +25,7 @@ export default function Game({ currentUser, onUserCleared }: GameProps) {
 
   // Sound effects for call simulation
   const playSound = (type: "incoming_call" | "missed_call" | "start") => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+    const audioContext = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
     const oscillator = audioContext.createOscillator();
     const gainNode = audioContext.createGain();
     
@@ -211,7 +210,7 @@ export default function Game({ currentUser, onUserCleared }: GameProps) {
               Klicka för att starta reaktionstestet
             </p>
             <p className="text-lg text-white/60">
-              Du kommer att få en inkommande samtalsnotis - klicka så snabbt som möjligt när samtalet "missas"
+              Du kommer att få en inkommande samtalsnotis - klicka så snabbt som möjligt när samtalet &quot;missas&quot;
             </p>
           </div>
         )}
@@ -223,7 +222,7 @@ export default function Game({ currentUser, onUserCleared }: GameProps) {
               <span className="text-xl text-white/80">Väntar på inkommande samtal...</span>
             </div>
             <p className="text-lg text-white/60">
-              Klicka så snabbt som möjligt när samtalet "missas"
+              Klicka så snabbt som möjligt när samtalet &quot;missas&quot;
             </p>
           </div>
         )}

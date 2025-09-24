@@ -13,7 +13,7 @@ export const createClient = (request: NextRequest) => {
     },
   });
 
-  createServerClient(
+  const supabase = createServerClient(
     supabaseUrl!,
     supabaseKey!,
     {
@@ -34,5 +34,5 @@ export const createClient = (request: NextRequest) => {
     },
   );
 
-  return supabaseResponse
+  return { supabase, response: supabaseResponse }
 };

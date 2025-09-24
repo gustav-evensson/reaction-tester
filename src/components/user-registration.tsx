@@ -52,7 +52,7 @@ export default function UserRegistration({ onUserRegistered }: UserRegistrationP
           Ange dina uppgifter för att starta testet
         </p>
         <p className="text-white/60 mb-6 text-center text-sm">
-          Du kommer att få en inkommande samtalsnotis - klicka så snabbt som möjligt när samtalet "missas". 
+          Du kommer att få en inkommande samtalsnotis - klicka så snabbt som möjligt när samtalet &quot;missas&quot;. 
           Vi jämför din tid med vår AI som alltid är blixtsnabb!
         </p>
         

@@ -10,7 +10,7 @@ import Link from "next/link";
 import { Trophy } from "lucide-react";
 
 export default function Home() {
-  const [, setCurrentUser] = useState<CurrentUser | null>(null);
+  const [_currentUser, setCurrentUser] = useState<CurrentUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 

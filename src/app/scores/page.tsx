@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import BestScore from "@/components/best-score";
 import Link from "next/link";
 import { Trophy, Medal, Award, Clock, User } from "lucide-react";
-import { Score } from "@/lib/types";
+import type { Score } from "@/lib/types";
 
 export default function ScoresPage() {
   const [scores, setScores] = useState<Score[]>([]);
