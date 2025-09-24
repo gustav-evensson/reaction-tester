@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { CurrentUser } from "@/lib/types";
 import { useRouter } from "next/navigation";
@@ -25,6 +25,7 @@ export default function Game({ highscore, currentUser, onUserCleared }: GameProp
 
   // Sound effects
   const playSound = (type: "success" | "fail" | "start") => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
     const oscillator = audioContext.createOscillator();
     const gainNode = audioContext.createGain();

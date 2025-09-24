@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { createClient } from "@/lib/supabase/client";
 import { CurrentUser } from "@/lib/types";
 
 interface UserRegistrationProps {

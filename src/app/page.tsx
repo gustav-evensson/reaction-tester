@@ -10,7 +10,7 @@ import { Trophy } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 
 export default function Home() {
-  const [currentUser, setCurrentUser] = useState<CurrentUser | null>(null);
+  const [, setCurrentUser] = useState<CurrentUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [highscore, setHighscore] = useState<number | null>(null);
   const router = useRouter();

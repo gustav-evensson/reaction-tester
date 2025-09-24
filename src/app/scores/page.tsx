@@ -1,5 +1,4 @@
 import { getScores } from "@/lib/supabase/scores";
-import { Score } from "@/lib/types";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Trophy, Medal, Award, Clock, User } from "lucide-react";
