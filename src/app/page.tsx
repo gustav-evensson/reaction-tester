@@ -4,15 +4,14 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { CurrentUser } from "@/lib/types";
 import UserRegistration from "@/components/user-registration";
+import BestScore from "@/components/best-score";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Trophy } from "lucide-react";
-import { createClient } from "@/lib/supabase/client";
 
 export default function Home() {
   const [, setCurrentUser] = useState<CurrentUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [highscore, setHighscore] = useState<number | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -31,22 +30,6 @@ export default function Home() {
         }
       }
 
-      // Fetch highscore
-      try {
-        const supabase = createClient();
-        const { data } = await supabase
-          .from('scores')
-          .select('score')
-          .order('score', { ascending: true })
-          .limit(1)
-          .single();
-
-        if (data) {
-          setHighscore(data.score);
-        }
-      } catch (error) {
-        console.error('Error fetching highscore:', error);
-      }
 
       setIsLoading(false);
     };
@@ -77,14 +60,7 @@ export default function Home() {
       
       {/* Highscore and Scores Button */}
       <div className="mt-8 flex flex-col items-center gap-4">
-        {highscore && (
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center">
-            <p className="text-sm text-white/80 mb-1">Best Time</p>
-            <p className="text-2xl font-bold text-yellow-300">
-              {highscore}ms
-            </p>
-          </div>
-        )}
+        <BestScore />
         
         <Button asChild variant="outline" className="bg-white/10 border-white/20 text-white hover:bg-white/20 backdrop-blur-sm">
           <Link href="/scores" className="flex items-center gap-2">

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { getScoresClient } from "@/lib/supabase/scores-client";
 import { Button } from "@/components/ui/button";
+import BestScore from "@/components/best-score";
 import Link from "next/link";
 import { Trophy, Medal, Award, Clock, User } from "lucide-react";
 import { Score } from "@/lib/types";
@@ -163,12 +164,7 @@ export default function ScoresPage() {
         {/* Footer Stats */}
         {scores.length > 0 && (
           <div className="max-w-4xl mx-auto mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 text-center">
-              <div className="text-3xl font-bold text-yellow-500 mb-2">
-                {scores[0]?.score}ms
-              </div>
-              <div className="text-gray-300">Best Time</div>
-            </div>
+            <BestScore size="lg" className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10" />
             <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 text-center">
               <div className="text-3xl font-bold text-blue-500 mb-2">
                 {scores.length}

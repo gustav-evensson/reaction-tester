@@ -5,21 +5,20 @@ import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { CurrentUser } from "@/lib/types";
 import { useRouter } from "next/navigation";
+import BestScore from "./best-score";
 
 interface GameProps {
-  highscore?: number;
   currentUser: CurrentUser;
   onUserCleared: () => void;
 }
 
-export default function Game({ highscore, currentUser, onUserCleared }: GameProps) {
+export default function Game({ currentUser, onUserCleared }: GameProps) {
   const [state, setState] = useState<
     "start" | "waiting" | "play" | "finish" | "fail"
   >("start");
 
   const [time, setTime] = useState(0);
   const [score, setScore] = useState(0);
-  const [localHighscore, setLocalHighscore] = useState(highscore || null);
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
   const router = useRouter();
 
@@ -92,11 +91,6 @@ export default function Game({ highscore, currentUser, onUserCleared }: GameProp
     const newScore = new Date().getTime() - time;
     console.log(newScore);
     setScore(newScore);
-    
-    
-    if (localHighscore === null || newScore < localHighscore) {
-      setLocalHighscore(newScore);
-    }
     playSound("success");
     setState("finish");
 
@@ -222,12 +216,7 @@ export default function Game({ highscore, currentUser, onUserCleared }: GameProp
       </div>
       
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center">
-        <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 mb-4">
-          <p className="text-sm text-white/80 mb-1">Best Time</p>
-          <p className="text-2xl font-bold text-yellow-300">
-            {localHighscore ? `${localHighscore}ms` : "None"}
-          </p>
-        </div>
+        <BestScore className="mb-4" />
         <p className="text-sm text-white/60">
           Click anywhere to {state === "start" ? "start" : state === "finish" ? "continue" : "continue"}
         </p>
