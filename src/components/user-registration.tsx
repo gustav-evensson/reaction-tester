@@ -79,7 +79,7 @@ export default function UserRegistration({ onUserRegistered }: UserRegistrationP
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-3 py-2 bg-white/20 border border-white/30 rounded-md text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent"
               placeholder="Enter your email"
-              required
+              required={false}
             />
           </div>
           
